@@ -20,3 +20,7 @@ Este código é um serviço em TypeScript usando o framework NestJS para fazer s
         - **`interceptRequest`**: Interrompe requisições de imagens, folhas de estilo e fontes durante a navegação.
 
 Este serviço encapsula a lógica de raspagem de dados do site do STJ de forma modular e reutilizável, seguindo boas práticas de programação assíncrona com o NestJS e Puppeteer.
+
+## Fluxo de execução
+- **GET /live/:code** - Retorna os dados do processo com o código fornecido, não salvando no banco de dados.
+- CRON Every 10 minutes - Raspagem de dados de processos com códigos fornecidos, salvando no banco de dados.

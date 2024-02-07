@@ -32,7 +32,13 @@ $ pnpm install
 ## Rodando o app
 
 ```bash
-# development
+# Generate Prisma Client
+$ pnpm db:generate
+
+# Migrate database (Optional)
+$ pnpm db:push
+
+# Transpile TypeScript to JavaScript
 $ pnpm build
 
 # production mode
@@ -58,6 +64,7 @@ docker run -d -p 9222:9222 --name puppeteer-chrome --cap-add=SYS_ADMIN ghcr.io/p
 ## Variáveis de ambiente
 
 ```env
+NODE_ENV=development # or production. default: development
 DATABASE_URL=postgres://postgres:password@localhost:5432/your_db_name
 BACKEND_PORT=3000 # default: 3000
 JWT_SECRET='your_secret'

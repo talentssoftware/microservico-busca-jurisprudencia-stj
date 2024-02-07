@@ -8,17 +8,21 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { JstjService } from './jstj.service';
 import { CreateJstjDto } from './dto/create-jstj.dto';
 import { UpdateJstjDto } from './dto/update-jstj.dto';
 import { JstjScrapper } from './jstj.scrapper';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ResponseDataDto } from '@/jstj/dto/response-data.dto';
 import { ExceptionErrorDto } from '@/commonServices/error/exception-error.dto';
 import { ResponseJstsDto } from '@/jstj/dto/response-jsts.dto';
+import { JwtAuthGuard } from '@/commonServices/auth/guards/jwt-auth.guard';
 
 @ApiTags('jstj')
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 @Controller('jstj')
 export class JstjController {
   constructor(

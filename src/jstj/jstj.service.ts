@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { CreateJstjDto } from './dto/create-jstj.dto';
 import { UpdateJstjDto } from './dto/update-jstj.dto';
 import { PrismaService } from '@/commonServices/prisma.service';
@@ -14,6 +14,7 @@ import { ResponseJstsDto } from '@/jstj/dto/response-jsts.dto';
  */
 @Injectable()
 export class JstjService {
+  private readonly logger = new Logger(JstjService.name);
   constructor(
     private readonly prisma: PrismaService,
     private readonly scrapper: JstjScrapper,
@@ -92,57 +93,43 @@ export class JstjService {
 
   /**
    * Cron Job
-   * A cada 5 minutos, verifica se há requisições no banco de dados
+   * A cada 10 minutos, verifica se há requisições no banco de dados
    * que ainda não foram processadas, e as processa.
    * O processamento consiste em fazer uma requisição ao site do STJ
    * e salvar os dados no banco de dados.
    *
    */
-  @Cron(CronExpression.EVERY_5_MINUTES)
+  @Cron(CronExpression.EVERY_10_MINUTES)
   async cronSearch() {
-    const queue = await this.prisma.sTJ_Request.findMany({
-      where: {
-        processedAt: null,
-      },
-    });
-    for (const q of queue) {
-      const response = await this.scrapper.genSearch(q.code);
-
-      // await this.prisma.sTJ_Response.createMany({
-      //   data: [
-      //     ...response.map((r) => {
-      //       return {
-      //         code: q.code,
-      //         processo: r.processo,
-      //         relator: r.textPre[0],
-      //         orgaoJulgador: r.textPre[1],
-      //         dataJulgamento: r.textPre[2],
-      //         dataPublicacao: r.textPre[3],
-      //         notas: r.textPre[4],
-      //         referenciaLegislativa: r.textPre[5],
-      //         ementa: r.textP[0],
-      //         acordao: r.textP[1],
-      //       };
-      //     }),
-      //   ],
-      // });
-      await this.prisma.sTJ_Response.createMany({
-        data: response.map((r) => {
-          return {
-            code: q.code,
-            ...r,
-          };
-        }),
-      });
-
-      await this.prisma.sTJ_Request.update({
+    try {
+      const queue = await this.prisma.sTJ_Request.findMany({
         where: {
-          id: q.id,
-        },
-        data: {
-          processedAt: new Date(),
+          processedAt: null,
         },
       });
+      for (const q of queue) {
+        const response = await this.scrapper.genSearch(q.code);
+
+        await this.prisma.sTJ_Response.createMany({
+          data: response.map((r) => {
+            return {
+              code: q.code,
+              ...r,
+            };
+          }),
+        });
+        // Atualiza o campo processedAt
+        await this.prisma.sTJ_Request.update({
+          where: {
+            id: q.id,
+          },
+          data: {
+            processedAt: new Date(),
+          },
+        });
+      }
+    } catch (e) {
+      this.logger.error(e);
     }
   }
 }

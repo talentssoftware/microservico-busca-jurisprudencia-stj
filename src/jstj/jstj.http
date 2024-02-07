@@ -1,0 +1,52 @@
+// Dados do STJ
+### Busca dados do STJ, não salva em banco.
+GET http://localhost:3000/jstj/live/AGUAS DO RIO
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6bnVsbCwic3ViIjo4LCJyb2xlIjoibWFzdGVyIiwiaWF0IjoxNzA3MzIzODcwLCJleHAiOjE3MDczMjc0NzB9.ao47b3E_on87E4Y6TXLNgWmXFsSq1MitQdz6-2iCnqY
+
+### Exibe dados do STJ por código.
+GET http://localhost:3000/jstj/data/AGUAS DO RIO
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6bnVsbCwic3ViIjo4LCJyb2xlIjoibWFzdGVyIiwiaWF0IjoxNzA3MzIzODcwLCJleHAiOjE3MDczMjc0NzB9.ao47b3E_on87E4Y6TXLNgWmXFsSq1MitQdz6-2iCnqY
+
+### Exibe dados do STJ por processo.
+GET http://localhost:3000/jstj/data/12%2F11%2F1111
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6bnVsbCwic3ViIjo4LCJyb2xlIjoibWFzdGVyIiwiaWF0IjoxNzA3MzIzODcwLCJleHAiOjE3MDczMjc0NzB9.ao47b3E_on87E4Y6TXLNgWmXFsSq1MitQdz6-2iCnqY
+
+// Fila de processamento
+
+### Lista fila.
+GET http://localhost:3000/jstj
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6bnVsbCwic3ViIjo4LCJyb2xlIjoibWFzdGVyIiwiaWF0IjoxNzA3MzIzODcwLCJleHAiOjE3MDczMjc0NzB9.ao47b3E_on87E4Y6TXLNgWmXFsSq1MitQdz6-2iCnqY
+
+### Exibe uma pesquisa
+GET http://localhost:3000/jstj/1
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6bnVsbCwic3ViIjo4LCJyb2xlIjoibWFzdGVyIiwiaWF0IjoxNzA3MzIzODcwLCJleHAiOjE3MDczMjc0NzB9.ao47b3E_on87E4Y6TXLNgWmXFsSq1MitQdz6-2iCnqY
+
+### Inclui pesquisa na fila de processamento
+POST http://localhost:3000/jstj
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6bnVsbCwic3ViIjo4LCJyb2xlIjoibWFzdGVyIiwiaWF0IjoxNzA3MzIzODcwLCJleHAiOjE3MDczMjc0NzB9.ao47b3E_on87E4Y6TXLNgWmXFsSq1MitQdz6-2iCnqY
+
+{
+  "code": "AGUAS DO RIO"
+}
+
+### Atualiza pesquisa na fila de processamento
+PATCH http://localhost:3000/jstj/1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6bnVsbCwic3ViIjo4LCJyb2xlIjoibWFzdGVyIiwiaWF0IjoxNzA3MzIzODcwLCJleHAiOjE3MDczMjc0NzB9.ao47b3E_on87E4Y6TXLNgWmXFsSq1MitQdz6-2iCnqY
+
+{
+  "code": "AGUAS DO RIO 1"
+}
+
+### Exclui pesquisa da fila de processamento
+DELETE http://localhost:3000/jstj/1
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6bnVsbCwic3ViIjo4LCJyb2xlIjoibWFzdGVyIiwiaWF0IjoxNzA3MzIzODcwLCJleHAiOjE3MDczMjc0NzB9.ao47b3E_on87E4Y6TXLNgWmXFsSq1MitQdz6-2iCnqY
