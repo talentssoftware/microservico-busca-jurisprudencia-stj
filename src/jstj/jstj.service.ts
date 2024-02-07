@@ -106,6 +106,7 @@ export class JstjService {
         where: {
           processedAt: null,
         },
+        take: 1,
       });
       for (const q of queue) {
         const response = await this.scrapper.genSearch(q.code);
@@ -114,7 +115,15 @@ export class JstjService {
           data: response.map((r) => {
             return {
               code: q.code,
-              ...r,
+              processo: r.processo,
+              relator: r.relator,
+              orgaoJulgador: r.orgaoJulgador,
+              dataJulgamento: r.dataJulgamento,
+              dataPublicacao: r.dataPublicacao,
+              notas: r.notas,
+              ementa: r.ementa,
+              acordao: r.acordao,
+              referenciaLegislativa: r.referenciaLegislativa,
             };
           }),
         });
