@@ -88,17 +88,17 @@ export class AuthController {
     const unit = str.at(-1);
     const value = parseInt(str.slice(0, -1));
     if (unit === 'd') {
-      return add(new Date(0), { days: value }).getTime();
+      return add(new Date(), { days: value }).getTime();
     } else if (unit === 's') {
-      return add(new Date(0), { seconds: value }).getTime();
+      return add(new Date(), { seconds: value }).getTime();
     } else if (unit === 'm') {
-      return add(new Date(0), { minutes: value }).getTime();
+      return add(new Date(), { minutes: value }).getTime();
     } else if (unit === 'h') {
-      return add(new Date(0), { hours: value }).getTime();
+      return add(new Date(), { hours: value }).getTime();
     } else if (unit === 'y') {
-      return add(new Date(0), { years: value }).getTime();
+      return add(new Date(), { years: value }).getTime();
     } else if (unit === 'w') {
-      return add(new Date(0), { weeks: value }).getTime();
+      return add(new Date(), { weeks: value }).getTime();
     } else {
       throw new Error('Unidade de tempo desconhecida.');
     }

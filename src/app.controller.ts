@@ -8,7 +8,7 @@ export class AppController {
 
   @ApiResponse({ status: 200, description: 'Bem vindo' })
   @Get()
-  async showHome() {
+  showHome() {
     return {
       message: 'Bem vindo ao sistema',
       version: this.config.get(

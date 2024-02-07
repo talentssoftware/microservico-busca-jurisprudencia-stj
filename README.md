@@ -13,7 +13,9 @@
 <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL">
 <img src="https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white" alt="Prisma">
 <img src="https://img.shields.io/badge/-Puppeteer-333333?style=for-the-badge&logo=puppeteer" alt="Puppeteer">
-<a href="https://medium.com/@mpreziuso/password-hashing-pbkdf2-scrypt-bcrypt-and-argon2-e25aaf41598e" <img src="https://img.shields.io/badge/-Argon2-333333?style=for-the-badge&logo=argon2" alt="Argon2"></p>
+<a href="https://medium.com/@mpreziuso/password-hashing-pbkdf2-scrypt-bcrypt-and-argon2-e25aaf41598e">
+<img src="https://img.shields.io/badge/-Argon2-333333?style=for-the-badge&logo=argon2" alt="Argon2"/>
+</a>
 
 </p>
 
@@ -31,10 +33,7 @@ $ pnpm install
 
 ```bash
 # development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
+$ pnpm build
 
 # production mode
 $ pnpm run start:prod
@@ -45,30 +44,38 @@ $ pnpm run start:prod
 ## Test
 
 ```bash
-# unit tests
-$ pnpm run test
+# Local
+docker build -t talentssoftware/microservico-busca-jurisprudencia-stj .
+docker run -p 3000:3000 talentssoftware/microservico-busca-jurisprudencia-stj
 
-# e2e tests
-$ pnpm run test:e2e
+# Remote
+docker build -t talentssoftware/microservico-busca-jurisprudencia-stj .
+docker run -p 3000:3000 -e PUPPETEER_MODE=remote -e PUPPETEER_ENDPOINT=http://host.docker.internal:9222 talentssoftware/microservico-busca-jurisprudencia-stj
+docker run -d -p 9222:9222 --name puppeteer-chrome --cap-add=SYS_ADMIN ghcr.io/puppeteer/puppeteer:latest
+``` 
 
-# test coverage
-$ pnpm run test:cov
-```
 
 ## Variáveis de ambiente
 
 ```env
 DATABASE_URL=postgres://postgres:password@localhost:5432/your_db_name
-BACKEND_PORT=3000
+BACKEND_PORT=3000 # default: 3000
 JWT_SECRET='your_secret'
-PUPPETEER_MODE=local # or remote
+PUPPETEER_MODE=local # or remote. default: local
 PUPPETEER_ENDPOINT=http://localhost:9222 # if PUPPETEER_MODE is remote
-JWT_EXPIRES_IN=1h # or 1m, 1d, 1w, 1y
+JWT_EXPIRES_IN=1h # or 1m, 1d, 1w, 1y. default: 1h
+ARGON_SALT='your_salt'
 ```
 Para gerar um JWT_SECRET, você pode usar o seguinte comando:
 
 ```bash
-$ node -e "console.log(require('crypto').randomBytes(256).toString('base64'));"
+node -e "console.log(require('crypto').randomBytes(256).toString('base64'));"
+```
+
+Para gerar um ARGON_SALT, você pode usar o seguinte comando:
+
+```bash
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'));"
 ```
 
 [company-logo]: https://avatars.githubusercontent.com/u/144166088?v=4

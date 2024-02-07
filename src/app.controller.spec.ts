@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 describe('AppController', () => {
   let appController: AppController;
@@ -8,7 +8,8 @@ describe('AppController', () => {
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
-      providers: [AppService],
+      imports: [ConfigModule.forRoot()],
+      providers: [ConfigService],
     }).compile();
 
     appController = app.get<AppController>(AppController);
@@ -16,7 +17,8 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+      const response = { message: 'Bem vindo ao sistema', version: '0.0.1' };
+      expect(appController.showHome()).toEqual(response);
     });
   });
 });
