@@ -46,19 +46,36 @@ $ pnpm run start:prod
 ```
 ## Rodando o app com Docker
 
-```bash
-## Test
 
 ```bash
 # Local
-docker build -t talentssoftware/microservico-busca-jurisprudencia-stj .
-docker run -p 3000:3000 talentssoftware/microservico-busca-jurisprudencia-stj
+## Build the image
+$ docker build -t talentssoftware/microservico-busca-jurisprudencia-stj .
+
+## Run the image for local puppeteer
+$ docker run -p 3000:3000 -e DATABASE_URL=postgres://postgres:Strong@P4ssword@host.docker.internal:5432/stj \
+ -e JWT_SECRET=your_secret -e ARGON_SALT=your_secret \
+ --add-host=host.docker.internal:host-gateway talentssoftware/microservico-busca-jurisprudencia-stj
 
 # Remote
-docker build -t talentssoftware/microservico-busca-jurisprudencia-stj .
-docker run -p 3000:3000 -e PUPPETEER_MODE=remote -e PUPPETEER_ENDPOINT=http://host.docker.internal:9222 talentssoftware/microservico-busca-jurisprudencia-stj
-docker run -d -p 9222:9222 --name puppeteer-chrome --cap-add=SYS_ADMIN ghcr.io/puppeteer/puppeteer:latest
+## Build the image
+$ docker build -t talentssoftware/microservico-busca-jurisprudencia-stj .
+
+## Run the image for remote puppeteer
+$ docker run -p 3000:3000 -e DATABASE_URL=postgres://postgres:Strong@P4ssword@host.docker.internal:5432/stj \
+ -e JWT_SECRET=your_secret -e ARGON_SALT=your_secret -e PUPPETEER_MODE=remote -e PUPPETEER_ENDPOINT=http://host.docker.internal:9222 \
+ --add-host=host.docker.internal:host-gateway talentssoftware/microservico-busca-jurisprudencia-stj 
+
+## Run the remote puppeteer
+$ docker run -d -p 9222:9222 --name puppeteer-chrome --cap-add=SYS_ADMIN blx32/chromium:latest --no-sandbox \
+  --remote-debugging-address=0.0.0.0 --remote-debugging-port=9222
 ``` 
+
+### Rodando com Docker Swarm
+
+```bash
+docker stack deploy -c stack.yml talentssoftware
+```
 
 
 ## Variáveis de ambiente
