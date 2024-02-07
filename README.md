@@ -82,6 +82,7 @@ docker stack deploy -c stack.yml talentssoftware
 
 ```env
 NODE_ENV=development # or production. default: development
+LOG_LEVEL=info # or debug, error, warn. default: info
 DATABASE_URL=postgres://postgres:password@localhost:5432/your_db_name
 BACKEND_PORT=3000 # default: 3000
 JWT_SECRET='your_secret'
