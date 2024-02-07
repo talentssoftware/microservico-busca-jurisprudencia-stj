@@ -42,14 +42,14 @@ model STJ_Response {
   code String // STJ_Request.code
 
   processo              String
-  relator               String
-  orgaoJulgador         String
-  dataJulgamento        String
-  dataPublicacao        String
-  notas                 String @db.Text
-  referenciaLegislativa String @db.Text
-  ementa                String @db.Text
-  acordao               String @db.Text
+  relator               String?
+  orgaoJulgador         String?
+  dataJulgamento        String?
+  dataPublicacao        String?
+  notas                 String? @db.Text
+  referenciaLegislativa String? @db.Text
+  ementa                String? @db.Text
+  acordao               String? @db.Text
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
