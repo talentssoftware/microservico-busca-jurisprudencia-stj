@@ -101,6 +101,7 @@ export class JstjService {
    */
   @Cron(CronExpression.EVERY_10_MINUTES)
   async cronSearch() {
+    this.logger.log('Cron Job: Verificando fila de processamento JSTJ.');
     try {
       const queue = await this.prisma.sTJ_Request.findMany({
         where: {
