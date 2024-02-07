@@ -4,6 +4,7 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV BACKEND_PORT=3000
 ENV PUPPETEER_MODE=local
+ENV LOG_LEVEL=info
 
 RUN corepack enable
 RUN apt-get update && apt-get install -y openssl ibglib2.0-0 \
