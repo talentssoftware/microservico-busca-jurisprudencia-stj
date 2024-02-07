@@ -80,7 +80,7 @@ export class JstjScrapper {
     const page = await this.browser.newPage();
     await this.interceptRequest(page);
     try {
-      await page.goto(this.CONST.url);
+      await page.goto(this.CONST.url, { timeout: 0 });
       // Verifica se o título da página é o esperado antes da busca
       await this.checkCaptcha(page);
 
