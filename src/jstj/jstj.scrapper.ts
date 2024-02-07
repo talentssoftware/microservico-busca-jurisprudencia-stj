@@ -43,6 +43,7 @@ export class JstjScrapper {
           headless: 'new',
           // headless: false,
           slowMo: 100,
+          timeout: 0,
           executablePath: executablePath(),
           args: ['--no-sandbox', '--disable-setuid-sandbox'],
         });
@@ -50,6 +51,7 @@ export class JstjScrapper {
         this.browser = await puppeteer.connect({
           browserURL: this.conf.getOrThrow('PUPPETEER_ENDPOINT'),
           slowMo: 100,
+          protocolTimeout: 0,
         });
         this.logger.log(
           `Browser connected to ${this.conf.getOrThrow(
