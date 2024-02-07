@@ -1,0 +1,58 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Usuários
+model User {
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  name     String?
+  password String
+  roleId   Int
+  role     Role    @relation(fields: [roleId], references: [id])
+
+  @@index([email, roleId], map: "email_roleId")
+}
+
+// Permissões de acesso
+model Role {
+  id          Int     @id @default(autoincrement())
+  description String?
+  name        String  @unique
+  users       User[]
+}
+
+model STJ_Request {
+  id          Int       @id @default(autoincrement())
+  title       String?
+  code        String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  processedAt DateTime?
+}
+
+model STJ_Response {
+  id   Int    @id @default(autoincrement())
+  code String // STJ_Request.code
+
+  processo              String
+  relator               String
+  orgaoJulgador         String
+  dataJulgamento        String
+  dataPublicacao        String
+  notas                 String @db.Text
+  referenciaLegislativa String @db.Text
+  ementa                String @db.Text
+  acordao               String @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([code, processo], map: "code_processo")
+}
