@@ -22,6 +22,7 @@ import { DatabaseModule } from '@/commonServices/database.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { EventModule } from '@/commonServices/events/event.module';
 import { JstjModule } from './jstj/jstj.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -80,6 +81,7 @@ import { JstjModule } from './jstj/jstj.module';
     CacheModule.register(),
     DatabaseModule,
     EventEmitterModule.forRoot(),
+    ScheduleModule.forRoot(),
     EventModule,
     AuthModule,
     JstjModule,
