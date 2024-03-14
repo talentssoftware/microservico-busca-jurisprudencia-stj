@@ -23,6 +23,10 @@
 
 Visa buscar jurisprudências no https://scon.stj.jus.br/SCON/ e retornar um JSON para aplicação.
 
+## Funcionamento
+
+Para um entendimento mais aprofundado, acesse [FUNCIONAMENTO.md](FUNCIONAMENTO.md)
+
 ## Instalação
 
 ```bash

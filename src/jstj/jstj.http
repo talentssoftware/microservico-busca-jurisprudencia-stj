@@ -1,13 +1,13 @@
 // Dados do STJ
 ### Busca dados do STJ, não salva em banco.
-GET http://localhost:3000/jstj/live/AGUAS DO RIO
+GET http://localhost:3000/jstj/live/TOI LIGHT MULTA
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6bnVsbCwic3ViIjo4LCJyb2xlIjoibWFzdGVyIiwiaWF0IjoxNzA3MzIzODcwLCJleHAiOjE3MDczMjc0NzB9.ao47b3E_on87E4Y6TXLNgWmXFsSq1MitQdz6-2iCnqY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwic3ViIjoxLCJyb2xlIjoibWFzdGVyIiwiaWF0IjoxNzEwNDMxMDAxLCJleHAiOjE3MTA0MzQ2MDF9.gW_7NIB7RIvqu47rwSNCQY1OyO48TM7yqgDGrVLez_o
 
 ### Exibe dados do STJ por código.
 GET http://localhost:3000/jstj/data/AGUAS DO RIO
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6bnVsbCwic3ViIjo4LCJyb2xlIjoibWFzdGVyIiwiaWF0IjoxNzA3MzIzODcwLCJleHAiOjE3MDczMjc0NzB9.ao47b3E_on87E4Y6TXLNgWmXFsSq1MitQdz6-2iCnqY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwic3ViIjoxLCJyb2xlIjoibWFzdGVyIiwiaWF0IjoxNzEwNDMxMDAxLCJleHAiOjE3MTA0MzQ2MDF9.gW_7NIB7RIvqu47rwSNCQY1OyO48TM7yqgDGrVLez_o
 
 ### Exibe dados do STJ por processo.
 GET http://localhost:3000/jstj/data/12%2F11%2F1111
@@ -19,7 +19,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6bnVsb
 ### Lista fila.
 GET http://localhost:3000/jstj
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6bnVsbCwic3ViIjo4LCJyb2xlIjoibWFzdGVyIiwiaWF0IjoxNzA3MzIzODcwLCJleHAiOjE3MDczMjc0NzB9.ao47b3E_on87E4Y6TXLNgWmXFsSq1MitQdz6-2iCnqY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwic3ViIjoxLCJyb2xlIjoibWFzdGVyIiwiaWF0IjoxNzEwNDMxMDAxLCJleHAiOjE3MTA0MzQ2MDF9.gW_7NIB7RIvqu47rwSNCQY1OyO48TM7yqgDGrVLez_o
 
 ### Exibe uma pesquisa
 GET http://localhost:3000/jstj/1
@@ -30,10 +30,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6bnVsb
 POST http://localhost:3000/jstj
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6bnVsbCwic3ViIjo4LCJyb2xlIjoibWFzdGVyIiwiaWF0IjoxNzA3MzIzODcwLCJleHAiOjE3MDczMjc0NzB9.ao47b3E_on87E4Y6TXLNgWmXFsSq1MitQdz6-2iCnqY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwic3ViIjoxLCJyb2xlIjoibWFzdGVyIiwiaWF0IjoxNzEwNDMxMDAxLCJleHAiOjE3MTA0MzQ2MDF9.gW_7NIB7RIvqu47rwSNCQY1OyO48TM7yqgDGrVLez_o
 
 {
-  "code": "AGUAS DO RIO"
+  "code": "TOI LIGHT MULTA"
 }
 
 ### Atualiza pesquisa na fila de processamento
@@ -50,3 +50,23 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6bnVsb
 DELETE http://localhost:3000/jstj/1
 Accept: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6bnVsbCwic3ViIjo4LCJyb2xlIjoibWFzdGVyIiwiaWF0IjoxNzA3MzIzODcwLCJleHAiOjE3MDczMjc0NzB9.ao47b3E_on87E4Y6TXLNgWmXFsSq1MitQdz6-2iCnqY
+
+// Login
+
+### Autentica usuário
+POST http://localhost:3000/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "admin"
+}
+
+### Exibe usuário autenticado
+GET http://localhost:3000/auth/verify
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwic3ViIjoxLCJyb2xlIjoibWFzdGVyIiwiaWF0IjoxNzEwNDMxMDAxLCJleHAiOjE3MTA0MzQ2MDF9.gW_7NIB7RIvqu47rwSNCQY1OyO48TM7yqgDGrVLez_o
+
+
+

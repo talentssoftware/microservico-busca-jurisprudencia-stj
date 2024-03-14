@@ -8,6 +8,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
 import { AuthController } from './AuthController';
 import { ConfigService } from '@nestjs/config';
 import { HashModule } from '@/commonServices/hash/hash.module';
+import { RoleModule } from '@/role/role.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { HashModule } from '@/commonServices/hash/hash.module';
       inject: [ConfigService],
     }),
     HashModule,
+    RoleModule,
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],
   exports: [AuthService],

@@ -13,8 +13,9 @@ import { RoleService } from './role.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { JwtAuthGuard } from '@/commonServices/auth/guards/jwt-auth.guard';
-import { ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiQuery, ApiTags } from "@nestjs/swagger";
 
+@ApiTags('Funções')
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
 @Controller('role')
